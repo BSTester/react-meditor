@@ -2,9 +2,9 @@
   "name": "react-meditor",
   "version": "1.0.0",
   "description": "an minder component for react",
-  "main": "dist/bundle.js", 
+  "main": "dist/App.js", 
   "scripts": {
-    "build": "rm -rf lib/ && babel src -d lib",
+    "build": "rm -rf dist/ && babel src -d dist",
     "lint": "eslint src/**/*.js example/**/*.js --fix",
     "start": "webpack-dev-server --config example/webpack.config.js --open"
   },
