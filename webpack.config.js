@@ -13,7 +13,7 @@ const plugins = isProd ? [new CleanWebpackPlugin()] : [
 
 module.exports = {
   mode: isProd ? 'production' : 'development',
-  entry: isProd ? './src/App.js' : './src/index.js',
+  entry: isProd ? './src/meditor.js' : './src/index.js',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, './dist'),
