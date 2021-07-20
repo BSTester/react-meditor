@@ -2,7 +2,7 @@
   "name": "react-meditor",
   "version": "1.0.0",
   "description": "an minder component for react",
-  "main": "src",
+  "main": "dist/bundle.js", 
   "scripts": {
     "build": "rm -rf lib/ && babel src -d lib",
     "lint": "eslint src/**/*.js example/**/*.js --fix",
@@ -20,12 +20,11 @@
   "license": "MIT",
   "homepage": "https://github.com/BSTester/react-meditor",
   "files": [
-    "lib",
+    "dist",
     "LICENSE",
     "README.md"
   ],
   "dependencies": {
-    "antd": "^4.16.8",
     "rc-dialog": "6.5.11"
   },
   "devDependencies": {
