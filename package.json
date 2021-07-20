@@ -1,12 +1,12 @@
 {
-  "name": "react-meditor",
+  "name": "react-minder-editor",
   "version": "1.0.0",
   "description": "an minder component for react",
-  "main": "dist/App.js", 
+  "main": "dist/App.js",
   "scripts": {
     "build": "rm -rf dist/ && babel src -d dist",
     "lint": "eslint src/**/*.js example/**/*.js --fix",
-    "start": "webpack-dev-server --config example/webpack.config.js --open"
+    "start": "react-scripts start"
   },
   "repository": {
     "type": "git",
@@ -25,7 +25,8 @@
     "README.md"
   ],
   "dependencies": {
-    "rc-dialog": "6.5.11"
+    "rc-dialog": "6.5.11",
+    "react-scripts": "^4.0.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",
@@ -54,5 +55,8 @@
     "webpack": "^4.26.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
+  },
+  "bugs": {
+    "url": "https://github.com/BSTester/react-meditor/issues"
   }
 }
