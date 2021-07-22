@@ -7,7 +7,7 @@ module.exports = {
   mode: 'production',
   entry: './src/Meditor.tsx',
   output: {
-    filename: 'bundle.js',
+    filename: 'Meditor.js',
     path: path.resolve(__dirname, './dist'),
     libraryTarget: 'commonjs2',  // 包需要被module.exports，这就要用到common
   },

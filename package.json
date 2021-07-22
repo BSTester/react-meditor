@@ -1,8 +1,9 @@
 {
   "name": "react-minder-editor",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "an minder component for react",
-  "main": "dist/bundle.js",
+  "main": "dist/Meditor.js",
+  "types": "dist/Meditor.d.ts",
   "scripts": {
     "build": "webpack",
     "lint": "eslint src/**/*.js example/**/*.js --fix"
