@@ -1,17 +1,23 @@
-import React, { useState, forwardRef, useImperativeHandle } from 'react';
+import React, { useState, forwardRef, useImperativeHandle, useRef } from 'react';
+import type {Props} from './Meditor.d';
 import {Alert} from 'antd';
 
-const Meditor = forwardRef((props, ref) => {
-  const [minder, setMinder] = useState(undefined);
+const Meditor: React.FC<Props> = forwardRef((props, ref) => {
+  const [minder, setMinder] = useState<any>(undefined);
   const [editor, setEditor] = useState(true);
   const {meditorPath='/meditor', width='100%', height=900, imageUpload=undefined, initValue=undefined} = props;
+  const minderRef = useRef<any>(null);
   useImperativeHandle(ref, ()=>{
     return {
       minder: minder,
+      importData: (a: any, b: any, c: any) => minder.importData(a,b,c),
+      importJson: (a: any) => minder.importJson(a),
+      exportData: (a: any, b: any) => minder.exportData(a,b),
+      exportJson: () => minder.exportJson(),
     }
   }, [minder]);
   const onLoad = () => {
-    const minder = window.document.getElementById('meditorFrame')?.contentWindow?.minder;
+    const minder = minderRef.current?.contentWindow?.minder;
     if(minder) {
       setMinder(minder);
       setEditor(true);
@@ -34,6 +40,7 @@ const Meditor = forwardRef((props, ref) => {
         style={{border: 0}}
         image-upload={imageUpload}
         onLoad={onLoad}
+        ref={minderRef}
       />}
     </div>
   );
