@@ -5,9 +5,9 @@ const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
   mode: 'production',
-  entry: './src/Meditor.tsx',
+  entry: './src/index.tsx',
   output: {
-    filename: 'Meditor.js',
+    filename: 'index.js',
     path: path.resolve(__dirname, './dist'),
     libraryTarget: 'commonjs2',  // 包需要被module.exports，这就要用到common
   },

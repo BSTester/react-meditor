@@ -1,5 +1,5 @@
 import React, { useState, forwardRef, useImperativeHandle, useRef } from 'react';
-import type {Props} from './Meditor.d';
+import type {Props} from './index.d';
 import {Alert} from 'antd';
 
 const Meditor: React.FC<Props> = forwardRef((props, ref) => {
@@ -10,10 +10,10 @@ const Meditor: React.FC<Props> = forwardRef((props, ref) => {
   useImperativeHandle(ref, ()=>{
     return {
       minder: minder,
-      importData: (a: any, b: any, c: any) => minder.importData(a,b,c),
-      importJson: (a: any) => minder.importJson(a),
-      exportData: (a: any, b: any) => minder.exportData(a,b),
-      exportJson: () => minder.exportJson(),
+      importData: (a: any, b: any, c: any) => minder?.importData?.(a,b,c),
+      importJson: (a: any) => minder?.importJson?.(a),
+      exportData: (a: any, b: any) => minder?.exportData?.(a,b),
+      exportJson: () => minder?.exportJson?.(),
     }
   }, [minder]);
   const onLoad = () => {
@@ -21,7 +21,7 @@ const Meditor: React.FC<Props> = forwardRef((props, ref) => {
     if(minder) {
       setMinder(minder);
       setEditor(true);
-      if(initValue) minder.importJson(initValue);
+      if(initValue) minder?.importJson?.(initValue);
     }else{
       setMinder(undefined);
       setEditor(false);
