@@ -4,5 +4,6 @@ export type Props = {
     height: string|number,
     imageUpload: string,
     initValue: object,
+    headers: object,
 }
   

@@ -5,7 +5,7 @@ import {Alert} from 'antd';
 const Meditor: React.FC<Props> = forwardRef((props, ref) => {
   const [minder, setMinder] = useState<any>(undefined);
   const [editor, setEditor] = useState(true);
-  const {meditorPath='/meditor', width='100%', height=900, imageUpload=undefined, initValue=undefined} = props;
+  const {meditorPath='/meditor', width='100%', height=900, imageUpload=undefined, initValue=undefined, headers=undefined} = props;
   const minderRef = useRef<any>(null);
   useImperativeHandle(ref, ()=>{
     return {
@@ -41,6 +41,7 @@ const Meditor: React.FC<Props> = forwardRef((props, ref) => {
         image-upload={imageUpload}
         onLoad={onLoad}
         ref={minderRef}
+        data-headers={headers}
       />}
     </div>
   );
