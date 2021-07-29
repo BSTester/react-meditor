@@ -56,8 +56,8 @@
 <script>
 	angular.module('kityminder', ['kityminderEditor'])
 			.config(function (configProvider) {
-				const imageUpload = window.parent.document.getElementById('meditorFrame').getAttribute('image-upload');
-				const headers = window.parent.document.getElementById('meditorFrame').getAttribute('data-headers');
+				const imageUpload = window.parent.document.getElementById('meditorFrame').dataset.upload;
+				const headers = window.parent.document.getElementById('meditorFrame').dataset.headers;
 				configProvider.set('imageUpload', imageUpload);
 				configProvider.set('headers', headers);
 			})

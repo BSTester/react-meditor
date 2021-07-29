@@ -1,7 +1,6 @@
 export type Props = {
     meditorPath: string,
-    width: string|number,
-    height: string|number,
+    style: object,
     imageUpload: string,
     initValue: object,
     headers: object,

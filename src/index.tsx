@@ -5,7 +5,7 @@ import {Alert} from 'antd';
 const Meditor: React.FC<Props> = forwardRef((props, ref) => {
   const [minder, setMinder] = useState<any>(undefined);
   const [editor, setEditor] = useState(true);
-  const {meditorPath='/meditor', width='100%', height=900, imageUpload=undefined, initValue=undefined, headers=undefined} = props;
+  const {meditorPath='/meditor/index.html', style={width: '100%', height: '100%', minHeight: 900, minWidth: '100%'}, imageUpload=undefined, initValue=undefined, headers=undefined} = props;
   const minderRef = useRef<any>(null);
   useImperativeHandle(ref, ()=>{
     return {
@@ -28,22 +28,21 @@ const Meditor: React.FC<Props> = forwardRef((props, ref) => {
     }
   };
   return (
-    <div style={{height: height, width: width}}>
-      {!editor ? 
-        <Alert type='error' style={{textAlign: 'center'}} message='初始化编辑器失败, 请检查 meditorPath 配置是否正确!' /> : 
-      <iframe 
-        title="Meditor"
-        id="meditorFrame"
-        src={`${meditorPath}/index.html`}
-        width="100%"
-        height="100%"
-        style={{border: 0}}
-        image-upload={imageUpload}
-        onLoad={onLoad}
-        ref={minderRef}
-        data-headers={headers}
-      />}
-    </div>
+    !editor ? 
+    <div style={{textAlign: 'center', marginTop: 10}}>
+      <Alert type='error' style={{marginBottom: 10}} message='初始化编辑器失败, 请检查 meditorPath 配置是否正确!' /> 
+      <a onClick={()=>{window.location.reload()}}>刷新</a>
+    </div>: 
+    <iframe 
+      title="Meditor"
+      id="meditorFrame"
+      src={meditorPath}
+      style={{border: 0, ...style}}
+      onLoad={onLoad}
+      ref={minderRef}
+      data-upload={imageUpload}
+      data-headers={headers}
+    />
   );
 })
 
