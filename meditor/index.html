@@ -59,7 +59,7 @@
 				const imageUpload = window.parent.document.getElementById('meditorFrame').dataset.upload;
 				const headers = window.parent.document.getElementById('meditorFrame').dataset.headers;
 				configProvider.set('imageUpload', imageUpload);
-				configProvider.set('headers', headers);
+				configProvider.set('headers', JSON.parse(headers));
 			})
 			.controller('MainController', function($scope) {
 				$scope.initEditor = function(editor, minder) {
