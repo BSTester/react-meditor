@@ -1,0 +1,15 @@
+{
+  "name": "zip.js",
+  "homepage": "https://github.com/gildas-lormeau/zip.js",
+  "version": "2.3.8",
+  "_release": "2.3.8",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.3.8",
+    "commit": "21e1832c1ab1f8fdaffeaad0305af84040987538"
+  },
+  "_source": "https://github.com/gildas-lormeau/zip.js.git",
+  "_target": "^2.3.8",
+  "_originalSource": "zip.js",
+  "_direct": true
+}
