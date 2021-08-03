@@ -5,7 +5,7 @@ import {Alert} from 'antd';
 const Meditor: React.FC<Props> = forwardRef((props, ref) => {
   const [minder, setMinder] = useState<any>(undefined);
   const [editor, setEditor] = useState(true);
-  const {meditorPath='/meditor/index.html', style={width: '100%', height: '100%', minHeight: 900, minWidth: '100%'}, imageUpload=undefined, initValue=undefined, headers=undefined} = props;
+  const {meditorPath='/meditor/index.html', style={width: '100%', height: '100%', minHeight: 900, minWidth: '100%'}, readonly=false, imageUpload=undefined, initValue=undefined, headers=undefined} = props;
   const minderRef = useRef<any>(null);
   useImperativeHandle(ref, ()=>{
     return {
@@ -22,6 +22,7 @@ const Meditor: React.FC<Props> = forwardRef((props, ref) => {
       setMinder(minder);
       setEditor(true);
       if(initValue) minder?.importJson?.(initValue);
+      if(readonly) minder?.fire('readonly');
     }else{
       setMinder(undefined);
       setEditor(false);

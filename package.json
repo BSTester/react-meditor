@@ -1,6 +1,6 @@
 {
   "name": "react-minder-editor",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "an minder component for react",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -4,5 +4,6 @@ export type Props = {
     imageUpload: string,
     initValue: object,
     headers: object,
+    readonly: boolean,
 }
   
