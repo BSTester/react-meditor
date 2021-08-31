@@ -1,4 +1,4 @@
-import React, { useState, forwardRef, useImperativeHandle, useRef } from 'react';
+import React, { useState, forwardRef, useImperativeHandle, useRef, useEffect } from 'react';
 import type {Props} from './index.d';
 import {Alert} from 'antd';
 
@@ -16,23 +16,32 @@ const Meditor: React.FC<Props> = forwardRef((props, ref) => {
       exportJson: () => minder?.exportJson?.(),
     }
   }, [minder]);
-  const onLoad = () => {
-    const minder = minderRef.current?.contentWindow?.minder;
-    if(minder) {
-      setMinder(minder);
+  const onLoad = (e: any) => {
+    let xminder = minderRef.current?.contentWindow?.minder;
+    if (!xminder && e && e?.type === 'message' && e?.data === 'ready' && e?.origin === window.location.origin){
+      xminder = e?.source?.minder;
+    }
+    if(xminder) {
+      setMinder(xminder);
       setEditor(true);
-      if(initValue) minder?.importJson?.(initValue);
-      if(readonly) minder?.fire('readonly');
-      if(onChange) minder?.on('contentchange', onChange);
+      if(initValue) xminder?.importJson?.(initValue);
+      if(readonly) xminder?.fire('readonly');
+      if(onChange) xminder?.on('contentchange', onChange);
     }else{
       setMinder(undefined);
       setEditor(false);
     }
   };
+  useEffect(() => {
+    window.addEventListener('message', onLoad);
+    return () => {
+      window.removeEventListener('message', onLoad);
+    }
+  }, []);
   return (
     !editor ? 
     <div style={{textAlign: 'center', marginTop: 10}}>
-      <Alert type='error' style={{marginBottom: 10}} message='初始化编辑器失败, 请检查 meditorPath 配置是否正确!' /> 
+      <Alert type='error' style={{marginBottom: 10}} message='初始化编辑器失败, 请尽量使用Chrome浏览器并检查 meditorPath 配置是否正确!' /> 
       <a onClick={()=>{window.location.reload()}}>刷新</a>
     </div>: 
     <iframe 
@@ -40,7 +49,6 @@ const Meditor: React.FC<Props> = forwardRef((props, ref) => {
       id="meditorFrame"
       src={meditorPath}
       style={{border: 0, ...style}}
-      onLoad={onLoad}
       ref={minderRef}
       data-upload={imageUpload}
       data-headers={headers}

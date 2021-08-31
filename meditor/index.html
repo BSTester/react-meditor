@@ -56,19 +56,19 @@
 
 <script>
 	angular.module('kityminder', ['kityminderEditor'])
-			.config(function (configProvider) {
-				const imageUpload = window.parent.document.getElementById('meditorFrame')?.dataset.upload;
-				const headers = window.parent.document.getElementById('meditorFrame')?.dataset.headers;
-				configProvider.set('imageUpload', imageUpload);
-				configProvider.set('headers', headers && JSON.parse(headers));
-			})
-			.controller('MainController', function($scope) {
-				$scope.initEditor = function(editor, minder) {
-					window.editor = editor;
-					window.minder = minder;
-				};
-			});
-
+	.config(function (configProvider) {
+		const imageUpload = window.parent.document.getElementById('meditorFrame')?.dataset.upload;
+		const headers = window.parent.document.getElementById('meditorFrame')?.dataset.headers;
+		configProvider.set('imageUpload', imageUpload);
+		configProvider.set('headers', headers && JSON.parse(headers));
+	})
+	.controller('MainController', function($scope) {
+		$scope.initEditor = function(editor, minder) {
+			window.editor = editor;
+			window.minder = minder;
+			window.parent.postMessage('ready', window.location.origin);
+		};
+	});
 </script>
 
 </html>
