@@ -5,7 +5,7 @@ import {Alert} from 'antd';
 const Meditor: React.FC<Props> = forwardRef((props, ref) => {
   const [minder, setMinder] = useState<any>(undefined);
   const [editor, setEditor] = useState(true);
-  const {meditorPath='/meditor/index.html', style={width: '100%', height: '100%', minHeight: 900, minWidth: '100%'}, onChange=undefined, readonly=false, imageUpload=undefined, initValue=undefined, headers=undefined} = props;
+  const {meditorPath='/meditor/index.html', style={width: '100%', height: '100%', minHeight: 900, minWidth: '100%'}, onChange=undefined, onLoad=undefined, readonly=false, imageUpload=undefined, initValue=undefined, headers=undefined} = props;
   const minderRef = useRef<any>(null);
   useImperativeHandle(ref, ()=>{
     return {
@@ -16,7 +16,7 @@ const Meditor: React.FC<Props> = forwardRef((props, ref) => {
       exportJson: () => minder?.exportJson?.(),
     }
   }, [minder]);
-  const onLoad = (e: any) => {
+  const onMessage = (e: any) => {
     let xminder = minderRef.current?.contentWindow?.minder;
     if (!xminder && e && e?.type === 'message' && e?.data === 'ready' && e?.origin === window.location.origin){
       xminder = e?.source?.minder;
@@ -33,9 +33,9 @@ const Meditor: React.FC<Props> = forwardRef((props, ref) => {
     }
   };
   useEffect(() => {
-    window.addEventListener('message', onLoad);
+    window.addEventListener('message', onMessage);
     return () => {
-      window.removeEventListener('message', onLoad);
+      window.removeEventListener('message', onMessage);
     }
   }, []);
   return (
@@ -52,6 +52,7 @@ const Meditor: React.FC<Props> = forwardRef((props, ref) => {
       ref={minderRef}
       data-upload={imageUpload}
       data-headers={headers}
+      onLoad={onLoad}
     />
   );
 })

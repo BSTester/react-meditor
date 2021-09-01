@@ -5,6 +5,7 @@ export type Props = {
     initValue: object,
     headers: object,
     readonly: boolean,
-    onChange: (value: object) => void,
+    onChange: (e: object) => void,
+    onLoad: (e: object) => void,
 }
   
