@@ -1,4 +1,4 @@
-import React, { useState, forwardRef, useImperativeHandle, useRef, useEffect } from 'react';
+import React, { useState, forwardRef, useImperativeHandle, useRef, useEffect, useCallback } from 'react';
 import type {Props} from './index.d';
 import {Alert} from 'antd';
 
@@ -16,7 +16,7 @@ const Meditor: React.FC<Props> = forwardRef((props, ref) => {
       exportJson: () => minder?.exportJson?.(),
     }
   }, [minder]);
-  const onMessage = (e: any) => {
+  const onMessage = useCallback((e: any) => {
     let xminder = minderRef.current?.contentWindow?.minder;
     if (!xminder && e && e?.type === 'message' && e?.data === 'ready' && e?.origin === window.location.origin){
       xminder = e?.source?.minder;
@@ -31,13 +31,13 @@ const Meditor: React.FC<Props> = forwardRef((props, ref) => {
       setMinder(undefined);
       setEditor(false);
     }
-  };
+  }, [initValue, readonly, onChange]);
   useEffect(() => {
     window.addEventListener('message', onMessage);
     return () => {
       window.removeEventListener('message', onMessage);
     }
-  }, []);
+  }, [onMessage]);
   return (
     !editor ? 
     <div style={{textAlign: 'center', marginTop: 10}}>
